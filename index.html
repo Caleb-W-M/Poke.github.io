@@ -2,20 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Welcome to Pokémon Restocks & Alerts Discord</title>
+  <title>Pokémon Restocks & Alerts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Font for cleaner typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #f3f1e9;          /* light earthy background */
-      --card-bg: #faf9f5;     /* slightly darker card */
-      --primary: #3a5a40;     /* deep forest green */
-      --primary-dark: #2d4a34;
-      --text: #2e2e2e;        /* dark brownish‑grey */
+      /* earthy palette */
+      --bg:#f5f3ef;
+      --card-bg:#fffbf7;
+      --primary:#556b2f;      /* olive green */
+      --primary-dark:#3d4f20;
+      --accent:#8c6a43;       /* warm brown */
+      --text:#252422;
+      --shadow:rgba(0,0,0,.06);
     }
-    *{box-sizing:border-box;}
+    *{box-sizing:border-box;margin:0;padding:0;}
     body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      font-family:'Inter',sans-serif;
       background:var(--bg);
       color:var(--text);
       line-height:1.6;
@@ -23,72 +29,117 @@
     main{
       max-width:720px;
       margin:4rem auto;
-      padding:2rem 1.5rem;
+      padding:2.5rem 2rem;
       background:var(--card-bg);
-      border-radius:12px;
-      box-shadow:0 4px 16px rgba(0,0,0,.05);
+      border-radius:14px;
+      box-shadow:0 6px 24px var(--shadow);
     }
     h1{
-      font-size:2.25rem;
-      margin:0 0 1rem;
-      letter-spacing:-0.02em;
+      font-size:2.5rem;
+      font-weight:700;
+      margin-bottom:1rem;
+      color:var(--primary-dark);
     }
     p{
-      font-size:1.1rem;
-      margin:0 0 1.75rem;
+      font-size:1.125rem;
+      margin-bottom:2rem;
     }
     .cta{
       display:inline-block;
       background:var(--primary);
       color:#fff;
-      padding:.85rem 1.75rem;
-      border-radius:8px;
+      padding:1rem 2rem;
+      border-radius:10px;
       font-weight:600;
       text-decoration:none;
-      transition:background .2s;
+      transition:transform .15s,background .2s;
     }
-    .cta:hover,
-    .cta:focus{
+    .cta:hover,.cta:focus{
       background:var(--primary-dark);
+      transform:translateY(-2px);
     }
-    iframe{
-      width:100%;
-      max-width:100%;
-      height:430px;
-      border:0;
-      border-radius:8px;
-      margin-top:1.5rem;
+    /* custom lightweight widget card */
+    #widget-card{
+      margin-top:2.5rem;
+      padding:1.75rem 1.5rem;
+      background:#faf9f5;
+      border:1px solid #e9e6de;
+      border-radius:12px;
+      box-shadow:0 2px 12px var(--shadow);
     }
+    #widget-card h2{
+      font-size:1.25rem;
+      font-weight:600;
+      margin-bottom:.75rem;
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      color:var(--accent);
+    }
+    #widget-card ul{
+      list-style:none;
+      margin-top:1rem;
+    }
+    #widget-card li{padding:.25rem 0;font-size:.95rem;}
+
     footer{
       font-size:.85rem;
       color:#555;
       border-top:1px solid #e0ddd2;
-      margin-top:2.5rem;
+      margin-top:3rem;
       padding-top:1rem;
     }
     @media (max-width:480px){
-      main{margin:2rem 1rem;}
-      h1{font-size:1.75rem;}
+      main{margin:2rem 1rem;padding:2rem 1.25rem;}
+      h1{font-size:2rem;}
     }
   </style>
 </head>
 <body>
   <main>
-    <h1>Welcome to Pokémon Restocks & Alerts Discord</h1>
-    <p>Be the first to know about Pokémon Center drops, plus stock alerts for Walmart, Target, Best Buy, Amazon and more!</p>
+    <h1>Pokémon Restocks & Alerts Discord</h1>
+    <p>Get instant notifications on Pokémon Center drops and store restocks from Walmart, Target, Best Buy, Amazon & more.</p>
 
     <a class="cta" href="https://discord.gg/DHMXV5xVSS?utm_source=reddit" target="_blank" rel="noopener">Join on Discord</a>
 
-    <iframe
-      src="https://discord.com/widget?id=1369077918244012072&theme=dark"
-      allowtransparency="true"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-    ></iframe>
+    <!-- Custom mini‑widget (no join button) -->
+    <div id="widget-card">
+      <h2 id="server-name"></h2>
+      <p id="member-stats"></p>
+      <ul id="channel-list"></ul>
+    </div>
 
     <footer>
-      <strong>Privacy & Terms</strong> – We don’t collect personal data. Clicking “Join” opens a Discord invite.<br>
-      © 2025 Pokémon Restocks & Alerts
+      <strong>Privacy & Terms</strong> – We don’t collect personal data. Clicking “Join” opens a Discord invite.<br>
+      © 2025 Pokémon Restocks & Alerts
     </footer>
   </main>
+
+<script>
+  /*
+   * Replaces the official iframe with a custom card built from the public
+   * widget JSON, giving you full control over the UI and avoiding Discord’s
+   * built‑in “Join” button.
+   */
+  const GUILD_ID = '1369077918244012072';          // ← replace with real server ID
+  fetch(`https://discord.com/api/guilds/${GUILD_ID}/widget.json`)
+    .then(r => r.json())
+    .then(data => {
+      if(!data.id) throw new Error('Widget disabled or wrong ID');
+      document.getElementById('server-name').textContent = data.name;
+      document.getElementById('member-stats').textContent =
+        `${data.presence_count} members online • ${data.members.length} total`;
+      const list = document.getElementById('channel-list');
+      data.channels.slice(0,6).forEach(ch => {
+        const li = document.createElement('li');
+        li.textContent = ch.name;
+        list.appendChild(li);
+      });
+    })
+    .catch(() => {
+      // hide the card entirely if widget JSON isn’t available
+      document.getElementById('widget-card').style.display = 'none';
+    });
+</script>
 </body>
 </html>
