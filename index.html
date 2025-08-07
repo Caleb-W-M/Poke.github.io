@@ -11,23 +11,34 @@
   <style>
     :root{
       /* earthy palette */
-      --bg:#f5f3ef;
-      --card-bg:#fffbf7;
-      --primary:#556b2f;      /* olive green */
+      --bg-start:#f6f4ec;      /* parchment */
+      --bg-end:#e9e4d4;        /* warm sand */
+      --card-bg:#fffdf9;       /* lighter card */
+      --primary:#556b2f;       /* olive green */
       --primary-dark:#3d4f20;
       --text:#252422;
       --shadow:rgba(0,0,0,.06);
     }
     *{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;}
     body{
       font-family:'Inter',sans-serif;
-      background:var(--bg);
+      /* soft angled gradient for subtle depth */
+      background:linear-gradient(135deg,var(--bg-start) 0%,var(--bg-end) 100%);
       color:var(--text);
       line-height:1.6;
     }
+    /* center the card when viewport is very tall */
+    .outer-wrapper{
+      min-height:100%;
+      display:flex;
+      align-items:start;
+      justify-content:center;
+      padding:3rem 1rem;
+    }
     main{
+      width:100%;
       max-width:720px;
-      margin:4rem auto;
       padding:2.5rem 2rem;
       background:var(--card-bg);
       border-radius:14px;
@@ -74,29 +85,30 @@
       padding-top:1rem;
     }
     @media (max-width:480px){
-      main{margin:2rem 1rem;padding:2rem 1.25rem;}
       h1{font-size:2rem;}
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Pokémon Restocks & Alerts Discord</h1>
-    <p>Get instant notifications on Pokémon Center drops and store restocks from Walmart, Target, Best Buy, Amazon & more.</p>
+  <div class="outer-wrapper">
+    <main>
+      <h1>Pokémon Restocks & Alerts Discord</h1>
+      <p>Get instant notifications on Pokémon Center drops and store restocks from Walmart, Target, Best Buy, Amazon & more.</p>
 
-    <a class="cta" href="https://discord.gg/DHMXV5xVSS?utm_source=reddit" target="_blank" rel="noopener">Join Discord</a>
+      <a class="cta" href="https://discord.gg/DHMXV5xVSS?utm_source=reddit" target="_blank" rel="noopener">Join on Discord</a>
 
-    <!-- Official Discord widget (branded look) -->
-    <div class="widget-wrap">
-      <iframe src="https://discord.com/widget?id=1369077918244012072&theme=dark"
-              allowtransparency="true"
-              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-    </div>
+      <!-- Official Discord widget (branded look) -->
+      <div class="widget-wrap">
+        <iframe src="https://discord.com/widget?id=1369077918244012072&theme=dark"
+                allowtransparency="true"
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      </div>
 
-    <footer>
-      <strong>Privacy & Terms</strong> – We don’t collect personal data. Clicking “Join” opens a Discord invite.<br>
-      © 2025 Pokémon Restocks & Alerts
-    </footer>
-  </main>
+      <footer>
+        <strong>Privacy & Terms</strong> – We don’t collect personal data. Clicking “Join” opens a Discord invite.<br>
+        © 2025 Pokémon Restocks & Alerts
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
