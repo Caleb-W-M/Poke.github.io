@@ -15,7 +15,6 @@
       --card-bg:#fffbf7;
       --primary:#556b2f;      /* olive green */
       --primary-dark:#3d4f20;
-      --accent:#8c6a43;       /* warm brown */
       --text:#252422;
       --shadow:rgba(0,0,0,.06);
     }
@@ -58,29 +57,14 @@
       background:var(--primary-dark);
       transform:translateY(-2px);
     }
-    /* custom lightweight widget card */
-    #widget-card{
+    /* wrapper for the official Discord widget */
+    .widget-wrap{
       margin-top:2.5rem;
-      padding:1.75rem 1.5rem;
-      background:#faf9f5;
-      border:1px solid #e9e6de;
       border-radius:12px;
+      overflow:hidden;
       box-shadow:0 2px 12px var(--shadow);
     }
-    #widget-card h2{
-      font-size:1.25rem;
-      font-weight:600;
-      margin-bottom:.75rem;
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-      color:var(--accent);
-    }
-    #widget-card ul{
-      list-style:none;
-      margin-top:1rem;
-    }
-    #widget-card li{padding:.25rem 0;font-size:.95rem;}
+    iframe{width:100%;border:0;height:430px;display:block;}
 
     footer{
       font-size:.85rem;
@@ -100,13 +84,13 @@
     <h1>Pokémon Restocks & Alerts Discord</h1>
     <p>Get instant notifications on Pokémon Center drops and store restocks from Walmart, Target, Best Buy, Amazon & more.</p>
 
-    <a class="cta" href="https://discord.gg/DHMXV5xVSS?utm_source=reddit" target="_blank" rel="noopener">Join on Discord</a>
+    <a class="cta" href="https://discord.gg/YOUR_INVITE?utm_source=reddit" target="_blank" rel="noopener">Join on Discord</a>
 
-    <!-- Custom mini‑widget (no join button) -->
-    <div id="widget-card">
-      <h2 id="server-name"></h2>
-      <p id="member-stats"></p>
-      <ul id="channel-list"></ul>
+    <!-- Official Discord widget (branded look) -->
+    <div class="widget-wrap">
+      <iframe src="https://discord.com/widget?id=YOUR_ID&theme=dark"
+              allowtransparency="true"
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
     </div>
 
     <footer>
@@ -114,32 +98,5 @@
       © 2025 Pokémon Restocks & Alerts
     </footer>
   </main>
-
-<script>
-  /*
-   * Replaces the official iframe with a custom card built from the public
-   * widget JSON, giving you full control over the UI and avoiding Discord’s
-   * built‑in “Join” button.
-   */
-  const GUILD_ID = '1369077918244012072';          // ← replace with real server ID
-  fetch(`https://discord.com/api/guilds/${GUILD_ID}/widget.json`)
-    .then(r => r.json())
-    .then(data => {
-      if(!data.id) throw new Error('Widget disabled or wrong ID');
-      document.getElementById('server-name').textContent = data.name;
-      document.getElementById('member-stats').textContent =
-        `${data.presence_count} members online • ${data.members.length} total`;
-      const list = document.getElementById('channel-list');
-      data.channels.slice(0,6).forEach(ch => {
-        const li = document.createElement('li');
-        li.textContent = ch.name;
-        list.appendChild(li);
-      });
-    })
-    .catch(() => {
-      // hide the card entirely if widget JSON isn’t available
-      document.getElementById('widget-card').style.display = 'none';
-    });
-</script>
 </body>
 </html>
