@@ -1,114 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Pokémon Restocks & Alerts</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google Font for cleaner typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      /* earthy palette */
-      --bg-start:#f6f4ec;      /* parchment */
-      --bg-end:#e9e4d4;        /* warm sand */
-      --card-bg:#fffdf9;       /* lighter card */
-      --primary:#556b2f;       /* olive green */
-      --primary-dark:#3d4f20;
-      --text:#252422;
-      --shadow:rgba(0,0,0,.06);
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    html,body{height:100%;}
-    body{
-      font-family:'Inter',sans-serif;
-      /* soft angled gradient for subtle depth */
-      background:linear-gradient(135deg,var(--bg-start) 0%,var(--bg-end) 100%);
-      color:var(--text);
-      line-height:1.6;
-    }
-    /* center the card when viewport is very tall */
-    .outer-wrapper{
-      min-height:100%;
-      display:flex;
-      align-items:start;
-      justify-content:center;
-      padding:3rem 1rem;
-    }
-    main{
-      width:100%;
-      max-width:720px;
-      padding:2.5rem 2rem;
-      background:var(--card-bg);
-      border-radius:14px;
-      box-shadow:0 6px 24px var(--shadow);
-    }
-    h1{
-      font-size:2.5rem;
-      font-weight:700;
-      margin-bottom:1rem;
-      color:var(--primary-dark);
-    }
-    p{
-      font-size:1.125rem;
-      margin-bottom:2rem;
-    }
-    .cta{
-      display:inline-block;
-      background:var(--primary);
-      color:#fff;
-      padding:1rem 2rem;
-      border-radius:10px;
-      font-weight:600;
-      text-decoration:none;
-      transition:transform .15s,background .2s;
-    }
-    .cta:hover,.cta:focus{
-      background:var(--primary-dark);
-      transform:translateY(-2px);
-    }
-    /* wrapper for the official Discord widget */
-    .widget-wrap{
-      margin-top:2.5rem;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 2px 12px var(--shadow);
-    }
-    iframe{width:100%;border:0;height:430px;display:block;}
-
-    footer{
-      font-size:.85rem;
-      color:#555;
-      border-top:1px solid #e0ddd2;
-      margin-top:3rem;
-      padding-top:1rem;
-    }
-    @media (max-width:480px){
-      h1{font-size:2rem;}
-    }
-  </style>
+  <meta charset="utf-8" />
+  <title>Redirecting…</title>
+  <!-- Fallback for very old/no-JS browsers -->
+  <meta http-equiv="refresh" content="0; url=https://discord.gg/DHMXV5xVSS?utm_source=landing" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      // Start with your Discord invite
+      const target = new URL("https://discord.gg/DHMXV5xVSS?utm_source=landing");
+      // Preserve incoming query params (utm_campaign, etc.)
+      const incoming = new URL(window.location.href);
+      incoming.searchParams.forEach((v, k) => target.searchParams.set(k, v));
+      // Redirect without adding an extra history entry
+      window.location.replace(target.toString());
+    })();
+  </script>
 </head>
 <body>
-  <div class="outer-wrapper">
-    <main>
-      <h1>Pokémon Restocks & Alerts Discord</h1>
-      <p>Get instant notifications before Pokémon Center drops and store restocks from Walmart, Target, Best Buy, Amazon & more.</p>
-
-      <a class="cta" href="https://discord.gg/DHMXV5xVSS?utm_source=reddit" target="_blank" rel="noopener">Join on Discord</a>
-
-      <!-- Official Discord widget (branded look) -->
-      <div class="widget-wrap">
-        <iframe src="https://discord.com/widget?id=1369077918244012072&theme=dark"
-                allowtransparency="true"
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-      </div>
-
-      <footer>
-        <strong>Privacy & Terms</strong> – We don’t collect personal data. Clicking “Join” opens a Discord invite.<br>
-        © 2025 Pokémon Restocks & Alerts
-      </footer>
-    </main>
-  </div>
+  <p>Redirecting to Discord… If nothing happens, 
+    <a href="https://discord.gg/DHMXV5xVSS?utm_source=landing">click here</a>.
+  </p>
 </body>
 </html>
